@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Interactiva: Poetry</title>
+    <style>
+        /* === ESTILOS GLOBALES Y DE ESCRITORIO === */
+        body {
+            font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0;
+            padding: 40px; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; box-sizing: border-box; transition: padding 0.3s ease;
+        }
+
+        .slideshow-container { position: relative; width: 90%; max-width: 960px; }
+        
+        .slide {
+            display: none; background-color: #fff; border: 1px solid #ccc;
+            height: 540px; padding: 40px 60px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-direction: column; justify-content: center; position: relative;
+            box-sizing: border-box;
+        }
+
+        .fade { animation-name: fade; animation-duration: 0.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        .prev, .next {
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; background-color: #cccccc; color: #333;
+            border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; font-size: 24px; transition: all 0.3s ease;
+            user-select: none; z-index: 10;
+        }
+
+        .prev { left: -70px; }
+        .next { right: -70px; }
+        .prev:hover, .next:hover { background-color: #aaaaaa; }
+
+        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #11a800; padding-bottom: 20px; color: #005A9C; }
+        .slide h2 { font-size: 2.8em; margin-top: 0; margin-bottom: 30px; text-align: center; color: #005A9C; }
+        .single-content { text-align: center; }
+        .single-content p { font-size: 1.5em; color: #444; }
+        .single-content pre { font-size: 1.2em; display: inline-block; text-align: left; max-width: 100%; }
+        pre { background-color: #2d3636; color: #fff; padding: 15px; border-radius: 5px; font-size: 1.1em; white-space: pre-wrap; }
+        .footer { position: absolute; bottom: 20px; right: 40px; font-size: 1em; color: #888; }
+
+        /* === MEDIA QUERIES === */
+        @media screen and (max-width: 768px) {
+            body { padding: 15px; }
+            .slideshow-container { width: 100%; padding-bottom: 75px; }
+            .slide { height: auto; min-height: 75vh; padding: 20px 25px; }
+            .prev, .next { top: auto; bottom: 15px; width: 45px; height: 45px; }
+            .prev { left: 50%; transform: translateX(-110%); }
+            .next { left: 50%; transform: translateX(10%); right: auto; }
+            .slide h1 { font-size: 2.2em; }
+            .slide h2 { font-size: 1.8em; }
+            .single-content p { font-size: 1.1em; }
+            .single-content pre { font-size: 1em; }
+            .footer { font-size: 0.8em; right: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+        <div class="slide fade">
+            <h1>Cheat Sheet de Python</h1>
+            <h2 style="color:#333; border:none;">Poetry</h2>
+            <div class="footer">1 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>¿Qué es Poetry?</h2>
+            <div class="single-content"><p>Una herramienta moderna para la gestión de dependencias, entornos virtuales y empaquetado de proyectos en Python. Su objetivo es hacerlo todo de forma fácil y predecible.</p></div>
+            <div class="footer">2 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Filosofía de Poetry</h2>
+            <div class="single-content"><p>Centraliza toda la configuración del proyecto en un solo archivo estándar: <code>pyproject.toml</code>.</p><p>Esto reemplaza a `Pipfile`, `requirements.txt`, `setup.py` y otros archivos de configuración.</p></div>
+            <div class="footer">3 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Instalación</h2>
+            <div class="single-content"><p>Se recomienda instalar Poetry de forma aislada para que no interfiera con otros paquetes de Python. El método oficial usa un script de instalación.</p><pre><code># Comando recomendado desde la web oficial
+curl -sSL https://install.python-poetry.org | python3 -</code></pre></div>
+            <div class="footer">4 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Iniciar un Nuevo Proyecto: <code>poetry new</code></h2>
+            <div class="single-content"><p>Crea una estructura de proyecto estándar y un archivo `pyproject.toml` listo para usar.</p><pre><code>poetry new mi-proyecto-genial</code></pre></div>
+            <div class="footer">5 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Iniciar en un Proyecto Existente: <code>poetry init</code></h2>
+            <div class="single-content"><p>Si ya tienes una carpeta de proyecto, este comando te guiará para crear el archivo `pyproject.toml`.</p><pre><code>cd mi-proyecto-existente
+poetry init</code></pre></div>
+            <div class="footer">6 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>El Archivo <code>pyproject.toml</code></h2>
+            <div class="single-content"><p>El archivo de configuración central. Define la información del proyecto y sus dependencias.</p><pre><code>[tool.poetry]
+name = "mi-proyecto-genial"
+version = "0.1.0"
+description = ""
+authors = ["Tu Nombre <tu@email.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"</code></pre></div>
+            <div class="footer">7 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Añadir Dependencias: <code>poetry add</code></h2>
+            <div class="single-content"><p>Instala un paquete y lo añade automáticamente a `pyproject.toml`. También actualiza el lockfile.</p><pre><code># Añade una dependencia de producción
+poetry add requests
+
+# Añade una dependencia de desarrollo
+poetry add pytest --group dev</code></pre></div>
+            <div class="footer">8 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>El Lockfile: <code>poetry.lock</code></h2>
+            <div class="single-content"><p>Al igual que Pipenv, Poetry crea un archivo `poetry.lock` que contiene las versiones exactas de todos los paquetes. Esto garantiza builds 100% reproducibles.</p></div>
+            <div class="footer">9 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Instalar Dependencias: <code>poetry install</code></h2>
+            <div class="single-content"><p>Lee el archivo `poetry.lock` (si existe) e instala las versiones exactas de las dependencias. Si no existe `poetry.lock`, lo crea a partir de `pyproject.toml`.</p><pre><code># En un proyecto nuevo
+poetry install</code></pre></div>
+            <div class="footer">10 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Gestión del Entorno Virtual</h2>
+            <div class="single-content"><p>Poetry gestiona los entornos virtuales automáticamente. Por defecto, los crea en una carpeta centralizada, no dentro de tu proyecto.</p></div>
+            <div class="footer">11 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Ejecutar Comandos: <code>poetry run</code></h2>
+            <div class="single-content"><p>Ejecuta un comando dentro del entorno virtual gestionado por Poetry.</p><pre><code>poetry run python mi_script.py
+poetry run pytest</code></pre></div>
+            <div class="footer">12 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Activar el Entorno: <code>poetry shell</code></h2>
+            <div class="single-content"><p>Inicia una nueva shell dentro del entorno virtual del proyecto.</p><pre><code>poetry shell</code></pre></div>
+            <div class="footer">13 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Actualizar Paquetes: <code>poetry update</code></h2>
+            <div class="single-content"><p>Busca nuevas versiones de los paquetes (respetando las restricciones de `pyproject.toml`) y actualiza el `poetry.lock`.</p><pre><code># Actualiza todos los paquetes
+poetry update
+
+# Actualiza solo un paquete
+poetry update requests</code></pre></div>
+            <div class="footer">14 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Eliminar Paquetes: <code>poetry remove</code></h2>
+            <div class="single-content"><p>Desinstala un paquete y lo elimina de tus archivos de configuración.</p><pre><code>poetry remove requests</code></pre></div>
+            <div class="footer">15 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Empaquetado: <code>poetry build</code></h2>
+            <div class="single-content"><p>Una de las grandes ventajas de Poetry. Este comando crea los archivos de distribución (`.tar.gz` y `.whl`) de tu proyecto, listos para ser publicados.</p><pre><code>poetry build</code></pre></div>
+            <div class="footer">16 / 18</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Publicación: <code>poetry publish</code></h2>
+            <div class="single-content"><p>Si has configurado tus credenciales de PyPI, este comando empaqueta Y sube tu librería directamente a PyPI.</p><pre><code>poetry publish</code></pre></div>
+            <div class="footer">17 / 18</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Conclusión</h2>
+            <div class="single-content"><p>Poetry es una herramienta moderna y completa que gestiona todo el ciclo de vida de un proyecto de Python, desde las dependencias hasta la publicación, usando el estándar `pyproject.toml`.</p></div>
+            <div class="footer">18 / 18</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            if (n > slides.length) { slideIndex = 1 } 
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            slides[slideIndex - 1].style.display = "flex";
+        }
+    </script>
+
+</body>
+</html>
